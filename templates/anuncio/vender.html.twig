@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vender{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Vender {{ anuncio.nomeAnuncio }}</h1>
+
+    <form method="post" class="card p-4 shadow-sm">
+        <div class="mb-3">
+            <label class="form-label">Precio Final (€):</label>
+            <input type="number" name="prezoFinal" step="0.01" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Fecha de Venta:</label>
+            <input type="date" name="dataVenta" class="form-control" required>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('app_anuncio') }}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">Confirmar Venta</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

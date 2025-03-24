@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historial de Anuncios{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Historial de Anuncios</h1>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Descrición</th>
+                <th>Data de Publicación</th>
+                <th>Data de Venta</th>
+                <th>Vendido</th>
+                <th>Prezo Inicial</th>
+                <th>Prezo Final</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for anuncio in anuncios %}
+            <tr>
+                <td>{{ anuncio.nomeAnuncio }}</td>
+                <td>{{ anuncio.descricion }}</td>
+                <td>{{ anuncio.dataPublicacion|date('d-m-Y') }}</td>
+                <td>{{ anuncio.dataVenta ? anuncio.dataVenta|date('d-m-Y') : '—' }}</td>
+                <td>
+                    {% if anuncio.vendido %}
+                        <span class="badge bg-success">Sí</span>
+                    {% else %}
+                        <span class="badge bg-danger">No</span>
+                    {% endif %}
+                </td>
+                <td>{{ anuncio.prezoInicial }} €</td>
+                <td>{{ anuncio.prezoFinal ? anuncio.prezoFinal ~ ' €' : '—' }}</td>
+                <td>
+                    <a href="{{ path('detalle_anuncio', {'id': anuncio.id}) }}" class="btn btn-info btn-sm">Detalles</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{{ path('app_anuncio') }}" class="btn btn-primary">Volver a Anuncios Disponibles</a>
+    </div>
+</div>
+{% endblock %}

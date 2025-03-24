@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Anuncios Disponibles{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Anuncios Disponibles</h1>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nome</th>
+                <th>Data de Publicación</th>
+                <th>Prezo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for anuncio in anuncios %}
+            <tr>
+                <td>{{ anuncio.nomeAnuncio }}</td>
+                <td>{{ anuncio.dataPublicacion|date('d-m-Y') }}</td>
+                <td>{{ anuncio.prezoInicial }} €</td>
+                <td>
+                    <a href="{{ path('detalle_anuncio', {'id': anuncio.id}) }}" class="btn btn-info btn-sm">Detalles</a>
+                    <a href="{{ path('vender_anuncio', {'id': anuncio.id}) }}" class="btn btn-success btn-sm">Vender</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between mt-4">
+        <a href="{{ path('historial_anuncio') }}" class="btn btn-secondary">Historial de Anuncios</a>
+        <a href="{{ path('crear_anuncio') }}" class="btn btn-primary">Crear Nuevo Anuncio</a>
+    </div>
+</div>
+{% endblock %}
